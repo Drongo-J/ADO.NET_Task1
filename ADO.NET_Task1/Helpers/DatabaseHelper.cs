@@ -1,6 +1,7 @@
 ﻿using ADO.NET_Task1.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -16,7 +17,8 @@ namespace ADO.NET_Task1.Helpers
             var authors = new List<Author>();
             using (var conn = new SqlConnection())
             {
-                conn.ConnectionString = "Data Source=AYXAN;Initial Catalog=Library;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+                conn.ConnectionString =
+                    ConfigurationManager.ConnectionStrings["MyConnString"].ConnectionString;
                 conn.Open();
 
                 SqlDataReader reader = null;
@@ -46,7 +48,8 @@ namespace ADO.NET_Task1.Helpers
         {
             using (var conn = new SqlConnection())
             {
-                conn.ConnectionString = "Data Source=AYXAN;Initial Catalog=Library;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+                conn.ConnectionString =
+                   ConfigurationManager.ConnectionStrings["MyConnString"].ConnectionString;
                 conn.Open();
 
                 string s = IDs.Aggregate((i, j) => i + "," + j).ToString();
@@ -71,7 +74,8 @@ namespace ADO.NET_Task1.Helpers
         {
             using (var conn = new SqlConnection())
             {
-                conn.ConnectionString = "Data Source=AYXAN;Initial Catalog=Library;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+                conn.ConnectionString =
+                  ConfigurationManager.ConnectionStrings["MyConnString"].ConnectionString;
                 conn.Open();
 
                 string query = $"UPDATE Authors Set FirstName='{firstname}',Lastname='{lastname}' WHERE ID={Id}";
@@ -89,7 +93,8 @@ namespace ADO.NET_Task1.Helpers
         {
             using (var conn = new SqlConnection())
             {
-                conn.ConnectionString = "Data Source=AYXAN;Initial Catalog=Library;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+                conn.ConnectionString =
+                  ConfigurationManager.ConnectionStrings["MyConnString"].ConnectionString;
                 conn.Open();
 
                 string query = $"INSERT INTO Authors ([Id],[FirstName],[LastName]) " +
